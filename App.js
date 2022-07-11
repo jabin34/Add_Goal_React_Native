@@ -5,26 +5,34 @@ import Goalinput from './components/Goalinput';
 import GoalItem from './components/GoalItem';
 
 export default function App() {
-  const [enteredGoalText,setEnteredGoalText]=useState('');
+ 
   const [goals,setGoals]=useState([]);
-  function goalInputHandler(enteredText){
-    setEnteredGoalText(enteredText);
-  };
-  function addGoalHandler(){
+  
+  function addGoalHandler(enteredGoalText){
     setGoals((currentCourseGoal) => [
       ...currentCourseGoal,
      { text:enteredGoalText, key:Math.random().toString()},
     ]);
   }
+   function deleteGoalHandler(id){
+    setGoals(currentCourseGoal =>{
+      return currentCourseGoal.filter((goal)=> goal.id!==id);
+    })
+    console.log('delete');
+   }
   return (
     <View style={styles.appContainer}>
-    <Goalinput addGoalHandler={addGoalHandler}  goalInputHandler={goalInputHandler}/>
+    <Goalinput onAddGoal={addGoalHandler} />
       
       <View style={styles.goalsContainer} >
         {/* <Text>List of goals...</Text> */}
         <FlatList data={goals} renderItem={(itemData) => {
           return(
-           < GoalItem  text={itemData.item.text}/>
+           <GoalItem  
+           id={itemData.item.id}
+           text={itemData.item.text} 
+           onDeleteItem={deleteGoalHandler}
+           />
           );
         }}
         keyExtractor = {(item,index) => {
