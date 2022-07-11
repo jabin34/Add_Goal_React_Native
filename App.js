@@ -30,7 +30,9 @@ export default function App() {
    }
 
   return (
-    <View style={styles.appContainer}>
+    <>
+    <StatusBar style='light'/>
+        <View style={styles.appContainer}>
       <Button 
       title='Add New Goal' 
       color='#67787879'
@@ -58,6 +60,8 @@ export default function App() {
          alwaysBounceVertical={false}/>   
       </View>
     </View>
+  </>
+  
   );
 }
 
@@ -65,7 +69,8 @@ const styles = StyleSheet.create({
   appContainer: {
     flex:1,
     padding:50,
-    paddingHorizontal: 16
+    paddingHorizontal: 16,
+    backgroundColor:"#1e085a",
   },
   
   goalsContainer:{
